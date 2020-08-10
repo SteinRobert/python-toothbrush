@@ -19,7 +19,7 @@ The Bluetooth protocol of every electric toothbrush may differ from any other. T
 every toothbrush integration needs to be thoroughly documented before it is implemented. 
 
 ### Documentation Phase
-- [ ] Philips Sonicare ExpertClean 7300
+- [ ] [Philips Sonicare ExpertClean 7300](https://github.com/SteinRobert/python-toothbrush/wiki/Philips-Sonicare-ExpertClean-7300)
 
 ### Implementation Phase
 
