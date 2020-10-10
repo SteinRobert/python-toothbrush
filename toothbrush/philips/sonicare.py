@@ -16,11 +16,8 @@ HANDLE_FIRMWARE_VERSION = 0x4A
 HANDLE_SOFTWARE_REVISION = 0x4C
 HANDLE_BRUSH_HEAD = 0x89
 
-MODE_MAP = {
-    b"00": "clean",
-    b"01": "gum health",
-    b"02": "deep clean"
-}
+MODE_MAP = {b"00": "clean", b"01": "gum health", b"02": "deep clean"}
+
 
 class Sonicare(Toothbrush):
     attributes = [
@@ -29,7 +26,7 @@ class Sonicare(Toothbrush):
         INTENSITY,
         BATTERY,
         BRUSHING_TIME,
-        #PRESSURE,
+        # PRESSURE,
         MANUFACTURER,
         MODEL_NUMBER,
         SERIAL_NUMBER,
@@ -49,7 +46,7 @@ class Sonicare(Toothbrush):
         MANUFACTURER: HANDLE_MANUFACTURER_NAME,
         SERIAL_NUMBER: HANDLE_SERIAL_NUMBER,
         HARDWARE_REVISION: HANDLE_HARDWARE_REVISION,
-        SOFTWARE_REVISION: HANDLE_SOFTWARE_REVISION
+        SOFTWARE_REVISION: HANDLE_SOFTWARE_REVISION,
     }
 
     def parse_routine(self, raw_data):
@@ -66,5 +63,3 @@ class Sonicare(Toothbrush):
 
     def parse_brushing_time(self, raw_data):
         return int(binascii.hexlify(raw_data)[:2], 16)
-
-

@@ -23,5 +23,5 @@ ATTRIBUTE_MAP_VERBOSE_NAME = {
     SERIAL_NUMBER: "serial_number",
     FIRMWARE_REVISION: "firmware_revision",
     SOFTWARE_REVISION: "software_revision",
-    HARDWARE_REVISION: "hardware_revision"
+    HARDWARE_REVISION: "hardware_revision",
 }

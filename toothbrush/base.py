@@ -15,7 +15,7 @@ class Toothbrush:
 
     @property
     def peripheral(self):
-        return Peripheral(self.address, "public", )
+        return Peripheral(self.address, "public")
 
     def update(self):
         peripheral = self.peripheral
@@ -36,7 +36,11 @@ class Toothbrush:
         try:
             return self.handles[attribute]
         except KeyError:
-            raise HandleNotDefined("{} is not defined in `handles`.".format(ATTRIBUTE_MAP_VERBOSE_NAME[attribute]))
+            raise HandleNotDefined(
+                "{} is not defined in `handles`.".format(
+                    ATTRIBUTE_MAP_VERBOSE_NAME[attribute]
+                )
+            )
 
     def show_attributes(self, update=False):
         if update:

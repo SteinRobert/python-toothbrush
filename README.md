@@ -11,7 +11,7 @@ Any help is appreciated. I'd love to see support for more toothbrushes in the fu
 
 ### How to add another toothbrush?
 The package assumes that a toothbrush has certain attributes (like routine, intensity, etc.).
-These attributes are read via Bluetooth from the toothbrush. The toothbrush exposes these attributes in form of 
+These attributes are read via Bluetooth from the toothbrush. The toothbrush exposes these attributes in form of
 certain characteristics. Characteristics can be read via a certain handle (or address).
 
 The package is trying to take care of the communication with the toothbrush, so you can focus on providing the correct
@@ -25,7 +25,7 @@ class FancyToothbrush(Toothbrush):
     attributes = [ROUTINE, INTENSITY]  # defines which attributes are available
     handles = {                        # defines under which handle the attributes can be read
         INTENSITY: 0x11,
-        ROUTINE: 0x12 
+        ROUTINE: 0x12
     }
 ```
 
@@ -51,7 +51,7 @@ class FancyToothbrush(Toothbrush):
     attributes = [ROUTINE, INTENSITY]  # defines which attributes are available
     handles = {                        # defines under which handle the attributes can be read
         INTENSITY: 0x11,
-        ROUTINE: 0x12 
+        ROUTINE: 0x12
     }
     ROUTINE_MAP = {
         0: "simple",

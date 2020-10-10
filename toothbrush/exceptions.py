@@ -1,3 +1,2 @@
-
 class HandleNotDefined(KeyError):
     pass
