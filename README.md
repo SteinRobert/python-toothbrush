@@ -6,25 +6,80 @@
 python-toothbrush is a package that provides a simple interface to connect
 to electric toothbrushes via Bluetooth.
 
-## Why is there no code?
+## Help Wanted
+Any help is appreciated. I'd love to see support for more toothbrushes in the future!
 
-The project was started in Aug 2020. 
-This repository reflects the current state of development. 
-Any results, insights or issues will be gathered here.
-As soon as we have enough information about a certain toothbrush it will be implemented.
+### How to add another toothbrush?
+The package assumes that a toothbrush has certain attributes (like routine, intensity, etc.).
+These attributes are read via Bluetooth from the toothbrush. The toothbrush exposes these attributes in form of 
+certain characteristics. Characteristics can be read via a certain handle (or address).
 
-## Toothbrush overview
+The package is trying to take care of the communication with the toothbrush, so you can focus on providing the correct
+handles:
 
-The Bluetooth protocol of every electric toothbrush may differ from any other. Therefore
-every toothbrush integration needs to be thoroughly documented before it is implemented. 
+```python
+from toothbrush.base import Toothbrush
+from toothbrush.constants import ROUTINE, INTENSITY
 
-### Documentation Phase
+class FancyToothbrush(Toothbrush):
+    attributes = [ROUTINE, INTENSITY]  # defines which attributes are available
+    handles = {                        # defines under which handle the attributes can be read
+        INTENSITY: 0x11,
+        ROUTINE: 0x12 
+    }
+```
+
+That's pretty much it. Let's test the implementation!
+
+```python
+>>>from toothbrush.fancy import FancyToothbrush
+>>>fancy = FancyToothbrush("00:11:22:33:44:55")
+>>>fancy.show_attributes()
+routine: b'\x01'
+intensity: b'\x01'
+```
+
+You may have noticed the output of the attribute values is not human readable. So let's change that! Just
+add a `parse_{attribute}` method for every attribute you'd like to parse.
+
+```python
+import binascii
+from toothbrush.base import Toothbrush
+from toothbrush.constants import ROUTINE, INTENSITY
+
+class FancyToothbrush(Toothbrush):
+    attributes = [ROUTINE, INTENSITY]  # defines which attributes are available
+    handles = {                        # defines under which handle the attributes can be read
+        INTENSITY: 0x11,
+        ROUTINE: 0x12 
+    }
+    ROUTINE_MAP = {
+        0: "simple",
+        1: "gum",
+        2: "deep clean"
+    }
+
+    def parse_intensity(self, raw_data):
+        return int(binascii.hexlify(raw_data))
+
+    def parse_routine(self, raw_data):
+        return self.ROUTINE_MAP[int(binascii.hexlify(raw_data))]
+```
+
+```python
+>>>from toothbrush.fancy import FancyToothbrush
+>>>fancy = FancyToothbrush("00:11:22:33:44:55")
+>>>fancy.show_attributes()
+routine: 'simple'
+intensity: 1
+```
+
+That's it!
+
+
+## Todos
+- [ ] CLI capabilities for better debugging
+- [ ] JSON / XML output for toothbrush
+
+## Supported toothbrushes
 - [ ] [Philips Sonicare ExpertClean 7300](https://github.com/SteinRobert/python-toothbrush/wiki/Philips-Sonicare-ExpertClean-7300)
-
-### Implementation Phase
-
-None yet.
-
-### Finished
- 
-None yet.
