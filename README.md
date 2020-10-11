@@ -1,6 +1,7 @@
 # python-toothbrush
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
 python-toothbrush is a package that provides a simple interface to connect
